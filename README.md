@@ -37,14 +37,36 @@ The data we have is from 90,189 players who installed the game while the AB-test
 When a player installed the game, they were randomly assigned to either.
 
 ## Steps
+1. Validating Database:
+We notice that there are roughly the same number of players in each version group (gate_30 and gate_40). This allows us to proceed without sampling at this moment.
+2. Create Null Hypothesis: Game version has no effect on day 1 and day 7 retention.
+3. Create Alternate Hypothesis: Game version does have an effect on day 1 and day 7 retention.
+4. Bootstrap day 1 mean retention to find density functions of each group. We notice that there is a trend where gate_30 has a higher bootstrapped mean retention. (NOTE: We bootstrap to build certainty that our initial finding of gate_30 having higher retentions is not just based on chance)
+5. Utilize above bootstrap to plot density function of % difference in mean retention.
+6. Identify probability that gate_30 has a higher day 1 retention than gate_40. This probability came out to ~0.9!
+7. Repeat the same steps for Day 7 retention.
+8. Conclude that the alternate hypothesis is correct.
 
 ## Results
+We notice from our data that players assigned to the Gate 30 group have a higher mean day 1 retention. To be confident, we bootstrap our data 500 times and create the following density functions showing this difference. \
+![ab both](https://github.com/rohangodara/Mobile-Games-AB-Testing/assets/77946323/ee54fcf0-c3d3-4bc8-bfe3-be638f04beba)
+![ab middle](https://github.com/rohangodara/Mobile-Games-AB-Testing/assets/77946323/252f31e6-5237-4d5f-97ad-61d6838af654) \
+We find that for the day 1 retention, players who are assigned to Gate 30 have a 0.962 probability of having a higher retention. \
+This is a significant difference! But, it is also possible that some players haven't reached the gate yet so it is important to check the Day 7 retention as well. We repeat the same steps as above to find our density functions for the percentage difference in Day 7 retention between the two groups. \
+![ab last](https://github.com/rohangodara/Mobile-Games-AB-Testing/assets/77946323/9f4d2b25-caed-4e55-ab89-46c95e784af1) \
+The percentage difference not only stays consistent with direction, but increases in magnitude. \ 
+Hence we can report that forcing players to wait an arbitrary amount of time at gate 30 as opposed to gate 40 improves player retention for Cookie Cats. But why is this? The theory of hedonic adaptation can give one explanation for this. In short, hedonic adaptation is the tendency for people to get less and less enjoyment out of a fun activity over time if that activity is undertaken continuously. By forcing players to take a break when they reach a gate, their enjoyment of the game is prolonged. But when the gate is moved to level 40, fewer players make it far enough, and they are more likely to quit the game because they simply got bored of it.
 
 ## Dependencies
+- Pandas
+- Matplotlib
 
 ## License
+This dataset is provided by DataCamp and the good folks over at Cookie Cats. Thank you to them!
 
 ## Contact
+- Phone: 415-694-0512
+- Email: rohan.godara00@gmail.com
 
 ### Sources
 [1] Curry, D. (2023). _Mobile Games Revenue Data (2023)_. Business of Apps. [Link](https://www.businessofapps.com/data/mobile-games-revenue/#:~:text=Even%20though%20mobile%20games%20still,of%20all%20revenue%20in%202021.)
